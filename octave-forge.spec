@@ -1,77 +1,82 @@
-%define octave_version 2.1.73
-%define qhull_version 2003.1
-# (Abel) GiNaC <= 1.3.0-1mdk placed header at fantastic location
-%define ginac_version 1.3.2
-
-Name:		octave-forge
-Version:	2006.03.17
-Release:	%mkrel 3
-Epoch:		0
-Summary:	Custom scripts, functions and extensions for GNU Octave
-License:	Public Domain
-Group:		Sciences/Mathematics
-Source0:	http://download.sourceforge.net/octave/%{name}-%{version}.tar.bz2
-Patch0:		%{name}-2005.06.13-legend.patch
-URL:		http://octave.sourceforge.net/
-BuildRoot:	%{_tmppath}/%{name}-%{version}-buildroot
-Requires:	octave >= %{octave_version}
-Requires:	libqhull >= %{qhull_version}
-BuildRequires:	gsl-devel
-BuildRequires:	gcc-c++
-BuildRequires:	gcc-gfortran
-BuildRequires:	ginac-devel >= %{ginac_version}
-BuildRequires:	hdf5-devel
-BuildRequires:	jpeg-devel
-BuildRequires:	lapack-devel
-BuildRequires:	libcln-devel
-BuildRequires:	libfftw-devel
-BuildRequires:	libqhull-devel >= %{qhull_version}
-BuildRequires:	libreadline-devel
-BuildRequires:	ncurses-devel
-BuildRequires:	octave >= %{octave_version}
-BuildRequires:	pcre-devel
-BuildRequires:	png-devel
-BuildRequires:	termcap-devel
-BuildRequires:	texi2html
-BuildRequires:	texinfo
-Obsoletes:	%{name}-devel
-Provides:	%{name}-devel
+Name:           octave-forge
+Version:        2006.07.09
+Release:        %mkrel 1
+Epoch:          0
+Summary:        Contributed functions for octave
+Group:          Sciences/Mathematics
+License:        Public Domain
+URL:            http://octave.sourceforge.net/
+## Source0:     http://umn.dl.sourceforge.net/sourceforge/octave/%{name}-%{version}.tar.gz
+## The original sources contain a non-free tree of functions that are
+## GPL incompatible. A patched version with the non-free sources removed
+## is created as follows:
+## tar xf octave-forge-%{version}.tar.gz
+## rm -r octave-forge-%{version}/nonfree/
+## tar czf octave-forge-%{version}.patched.tar.gz octave-forge-%{version}
+## rm -r octave-forge-%{version}
+Source0:        %{name}-%{version}.patched.tar.gz
+Patch0:         octave-forge-2006.07.09-legend.patch
+Patch1:         octave-forge-2006.07.09-imread.patch
+Patch2:         octave-forge-2006.07.09-path.patch
+Requires:       ImageMagick
+Requires:       octave3
+Requires:       octave(api) = api-v24
+BuildRequires:  gcc-gfortran
+BuildRequires:  ginac-devel
+BuildRequires:  gsl-devel
+BuildRequires:  ImageMagick-devel
+BuildRequires:  libjpeg-devel
+BuildRequires:  libnc-dap-devel
+BuildRequires:  libpng-devel
+BuildRequires:  ncurses-devel
+BuildRequires:  octave3-devel
+BuildRequires:  pcre-devel
+BuildRequires:  qhull-devel
+BuildRequires:  tetex
+BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}-root
 
 %description
-The octave-forge package contains the source for all the functions plus
-build and install scripts. These are designed to work with the latest
-development version of Octave (available from
-http://www.octave.org/download.html), but most functions will work on
-earlier versions of Octave including 2.0.x versions.
+Octave-forge is a community project for collaborative development of
+octave extensions. The extensions in this package include additional
+data types such as sparse matrices, and functions for a variety of
+different applications including signal and image processing,
+communications, control, optimization, statistics, geometry, and
+symbolic math.
 
 %prep
 %setup -q
-%{__rm} -rf main/sparse
-%patch0 -p0 -b .legend
+%patch0 -p0
+%patch1 -p0
+%patch2 -p0
+# For octave >= 2.9.7, don't install the mex stuff or path stuff
+touch extra/mex/NOINSTALL
+touch main/path/NOINSTALL
 
 %build
-%configure2_5x
-%make
+ALTMPATHNAME=%{_datadir}/octave/site/octave-forge-alternatives/m/octave-forge
+XPATHNAME=`%{_bindir}/octave-config -p LOCALARCHLIBDIR`/octave-forge
+%{configure2_5x} --with-altmpath=$ALTMPATHNAME --with-xpath=$XPATHNAME
+%{make}
 
 %install
 %{__rm} -rf %{buildroot}
-%makeinstall_std
-
-find %{buildroot}%{_datadir}/octave/%{octave_version}/site/m/%{name} \
-  -type f -name "*.m" -exec %{__perl} -pi -e 's|\r$||g' {} \;
-
-find %{buildroot} -type f -name '*.oct' -print0 \
-  | xargs -0 -r strip --strip-unneeded
+ALTPATHNAME=octave/site/octave-forge-alternatives
+HOSTTYPE=`%{_bindir}/octave-config -p CANONICAL_HOST_TYPE`
+%{makeinstall_std} \
+  MPATH=`%{_bindir}/octave-config -p LOCALFCNFILEDIR`/octave-forge \
+  OPATH=`%{_bindir}/octave-config -p LOCALAPIOCTFILEDIR`/octave-forge \
+  XPATH=`%{_bindir}/octave-config -p LOCALARCHLIBDIR`/octave-forge \
+  ALTPATH=%{_datadir}/$ALTPATHNAME/m \
+  ALTMPATH=%{_datadir}/$ALTPATHNAME/m/octave-forge \
+  ALTOPATH=%{_libexecdir}/$ALTPATHNAME/oct/$HOSTTYPE
 
 %clean
 %{__rm} -rf %{buildroot}
 
 %files
-%defattr(-,root,root,755)
-%doc AUTHORS ChangeLog COPYING* README RELEASE-NOTES TODO
-%{_bindir}/mex
-%{_datadir}/octave
-%{_libdir}/octave
-%{_mandir}/man1/mex.1*
-
-
+%defattr(-,root,root)
+%doc COPYING* README RELEASE-NOTES TODO
+%doc doc/*.html doc/coda/*.sgml doc/coda/appendices/*.sgml
+%doc doc/coda/oct/*.sgml doc/coda/standalone/*.sgml
+%{_datadir}/octave/*
+%{_libexecdir}/octave/*
