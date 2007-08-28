@@ -1,6 +1,6 @@
 Name:           octave-forge
 Version:        2006.07.09
-Release:        %mkrel 1
+Release:        %mkrel 2
 Epoch:          0
 Summary:        Contributed functions for octave
 Group:          Sciences/Mathematics
@@ -20,7 +20,7 @@ Patch1:         octave-forge-2006.07.09-imread.patch
 Patch2:         octave-forge-2006.07.09-path.patch
 Requires:       ImageMagick
 Requires:       octave3
-Requires:       octave(api) = api-v24
+#Requires:      octave(api) = api-v24
 BuildRequires:  gcc-gfortran
 BuildRequires:  ginac-devel
 BuildRequires:  gsl-devel
