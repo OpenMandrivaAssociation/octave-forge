@@ -1,26 +1,16 @@
 Name:           octave-forge
-Version:        2006.07.09
-Release:        %mkrel 2
+Version:        2007.07.26
+Release:        %mkrel 1
 Epoch:          0
 Summary:        Contributed functions for octave
 Group:          Sciences/Mathematics
 License:        Public Domain
 URL:            http://octave.sourceforge.net/
-## Source0:     http://umn.dl.sourceforge.net/sourceforge/octave/%{name}-%{version}.tar.gz
-## The original sources contain a non-free tree of functions that are
-## GPL incompatible. A patched version with the non-free sources removed
-## is created as follows:
-## tar xf octave-forge-%{version}.tar.gz
-## rm -r octave-forge-%{version}/nonfree/
-## tar czf octave-forge-%{version}.patched.tar.gz octave-forge-%{version}
-## rm -r octave-forge-%{version}
 Source0:        %{name}-%{version}.patched.tar.gz
-Patch0:         octave-forge-2006.07.09-legend.patch
-Patch1:         octave-forge-2006.07.09-imread.patch
-Patch2:         octave-forge-2006.07.09-path.patch
 Requires:       ImageMagick
 Requires:       octave3
 #Requires:      octave(api) = api-v24
+BuildRequires:  cvs2cl
 BuildRequires:  gcc-gfortran
 BuildRequires:  ginac-devel
 BuildRequires:  gsl-devel
@@ -33,6 +23,9 @@ BuildRequires:  octave3-devel
 BuildRequires:  pcre-devel
 BuildRequires:  qhull-devel
 BuildRequires:  tetex
+BuildRequires:  tetex-texi2html
+BuildRequires:  tetex-dvipdfm
+BuildRequires:  tetex-dvips
 BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}-root
 
 %description
@@ -45,18 +38,13 @@ symbolic math.
 
 %prep
 %setup -q
-%patch0 -p0
-%patch1 -p0
-%patch2 -p0
-# For octave >= 2.9.7, don't install the mex stuff or path stuff
-touch extra/mex/NOINSTALL
-touch main/path/NOINSTALL
 
 %build
 ALTMPATHNAME=%{_datadir}/octave/site/octave-forge-alternatives/m/octave-forge
 XPATHNAME=`%{_bindir}/octave-config -p LOCALARCHLIBDIR`/octave-forge
 %{configure2_5x} --with-altmpath=$ALTMPATHNAME --with-xpath=$XPATHNAME
-%{make}
+%{__perl} -pi -e 's/ installpause//g' Makefile
+%{__make} all
 
 %install
 %{__rm} -rf %{buildroot}
