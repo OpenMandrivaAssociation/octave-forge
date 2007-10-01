@@ -1,31 +1,39 @@
 Name:           octave-forge
-Version:        2007.07.26
-Release:        %mkrel 1
+Version:        2006.07.09
+Release:        %mkrel 2
 Epoch:          0
 Summary:        Contributed functions for octave
 Group:          Sciences/Mathematics
 License:        Public Domain
 URL:            http://octave.sourceforge.net/
 Source0:        %{name}-%{version}.patched.tar.gz
+Patch0:         octave-forge-2006.07.09-legend.patch
+Patch1:         octave-forge-2006.07.09-imread.patch
+Patch2:         octave-forge-2006.07.09-path.patch
+Patch3:         octave-forge-2006.07.09-configure.patch
+Patch4:         octave-forge-2006.07.09-octave3.patch
 Requires:       ImageMagick
 Requires:       octave3
-#Requires:      octave(api) = api-v24
+Requires:       octave(api) = api-v26
 BuildRequires:  cvs2cl
 BuildRequires:  gcc-gfortran
 BuildRequires:  ginac-devel
 BuildRequires:  gsl-devel
 BuildRequires:  ImageMagick-devel
-BuildRequires:  libjpeg-devel
-BuildRequires:  libnc-dap-devel
-BuildRequires:  libpng-devel
+BuildRequires:  latex2html
+BuildRequires:  jpeg-devel
+BuildRequires:  nc-dap-devel
 BuildRequires:  ncurses-devel
+BuildRequires:  png-devel
 BuildRequires:  octave3-devel
+BuildRequires:  octave(api) = api-v26
 BuildRequires:  pcre-devel
 BuildRequires:  qhull-devel
 BuildRequires:  tetex
-BuildRequires:  tetex-texi2html
+BuildRequires:  tetex-latex
 BuildRequires:  tetex-dvipdfm
 BuildRequires:  tetex-dvips
+BuildRequires:  tetex-texi2html
 BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}-root
 
 %description
@@ -38,16 +46,24 @@ symbolic math.
 
 %prep
 %setup -q
+%patch0 -p0
+%patch1 -p0
+%patch2 -p0
+%patch3 -p0
+%patch4 -p0
+/bin/touch extra/MacOSX/NOINSTALL
+/bin/touch extra/testfun/NOINSTALL
+/bin/touch extra/mex/NOINSTALL
 
 %build
 ALTMPATHNAME=%{_datadir}/octave/site/octave-forge-alternatives/m/octave-forge
 XPATHNAME=`%{_bindir}/octave-config -p LOCALARCHLIBDIR`/octave-forge
 %{configure2_5x} --with-altmpath=$ALTMPATHNAME --with-xpath=$XPATHNAME
-%{__perl} -pi -e 's/ installpause//g' Makefile
-%{__make} all
+%{make}
 
 %install
 %{__rm} -rf %{buildroot}
+
 ALTPATHNAME=octave/site/octave-forge-alternatives
 HOSTTYPE=`%{_bindir}/octave-config -p CANONICAL_HOST_TYPE`
 %{makeinstall_std} \
