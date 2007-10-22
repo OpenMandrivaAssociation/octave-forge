@@ -1,6 +1,8 @@
+%define octave_api api-v27
+
 Name:           octave-forge
 Version:        2006.07.09
-Release:        %mkrel 2
+Release:        %mkrel 3
 Epoch:          0
 Summary:        Contributed functions for octave
 Group:          Sciences/Mathematics
@@ -14,7 +16,7 @@ Patch3:         octave-forge-2006.07.09-configure.patch
 Patch4:         octave-forge-2006.07.09-octave3.patch
 Requires:       ImageMagick
 Requires:       octave3
-Requires:       octave(api) = api-v26
+Requires:       octave(api) = %{octave_api}
 BuildRequires:  cvs2cl
 BuildRequires:  gcc-gfortran
 BuildRequires:  ginac-devel
@@ -26,7 +28,7 @@ BuildRequires:  nc-dap-devel
 BuildRequires:  ncurses-devel
 BuildRequires:  png-devel
 BuildRequires:  octave3-devel
-BuildRequires:  octave(api) = api-v26
+BuildRequires:  octave(api) = %{octave_api}
 BuildRequires:  pcre-devel
 BuildRequires:  qhull-devel
 BuildRequires:  tetex
