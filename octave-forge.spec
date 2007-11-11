@@ -1,8 +1,8 @@
-%define octave_api api-v27
+%define octave_api api-v28
 
 Name:           octave-forge
 Version:        2006.07.09
-Release:        %mkrel 3
+Release:        %mkrel 4
 Epoch:          0
 Summary:        Contributed functions for octave
 Group:          Sciences/Mathematics
