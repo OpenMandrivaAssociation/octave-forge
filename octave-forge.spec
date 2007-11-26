@@ -2,7 +2,7 @@
 
 Name:           octave-forge
 Version:        2006.07.09
-Release:        %mkrel 4
+Release:        %mkrel 5
 Epoch:          0
 Summary:        Contributed functions for octave
 Group:          Sciences/Mathematics
@@ -75,6 +75,9 @@ HOSTTYPE=`%{_bindir}/octave-config -p CANONICAL_HOST_TYPE`
   ALTPATH=%{_datadir}/$ALTPATHNAME/m \
   ALTMPATH=%{_datadir}/$ALTPATHNAME/m/octave-forge \
   ALTOPATH=%{_libexecdir}/$ALTPATHNAME/oct/$HOSTTYPE
+
+# XXX: see http://qa.mandriva.com/show_bug.cgi?id=35790
+%{__rm} %{buildroot}%{_datadir}/octave/site/m/octave-forge/plot/drawnow.m
 
 %clean
 %{__rm} -rf %{buildroot}
