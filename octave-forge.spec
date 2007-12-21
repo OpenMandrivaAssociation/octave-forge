@@ -36,6 +36,7 @@ BuildRequires:  tetex-latex
 BuildRequires:  tetex-dvipdfm
 BuildRequires:  tetex-dvips
 BuildRequires:  tetex-texi2html
+BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}-root
 
 %description
 Octave-forge is a community project for collaborative development of
