@@ -24,6 +24,7 @@ BuildRequires:  gsl-devel
 BuildRequires:  ImageMagick-devel
 BuildRequires:  latex2html
 BuildRequires:  jpeg-devel
+BuildRequires:  lapack-devel
 BuildRequires:  nc-dap-devel
 BuildRequires:  ncurses-devel
 BuildRequires:  png-devel
