@@ -1,8 +1,8 @@
-%define octave_api api-v28
+%define octave_api api-v32
 
 Name:           octave-forge
 Version:        2006.07.09
-Release:        %mkrel 5
+Release:        %mkrel 6
 Epoch:          0
 Summary:        Contributed functions for octave
 Group:          Sciences/Mathematics
@@ -27,7 +27,7 @@ BuildRequires:  jpeg-devel
 BuildRequires:  nc-dap-devel
 BuildRequires:  ncurses-devel
 BuildRequires:  png-devel
-BuildRequires:  octave3-devel
+#BuildRequires:  octave-devel
 BuildRequires:  octave(api) = %{octave_api}
 BuildRequires:  pcre-devel
 BuildRequires:  qhull-devel
@@ -48,6 +48,7 @@ symbolic math.
 
 %prep
 %setup -q
+%{_bindir}/find . -name '*.cc' | %{_bindir}/xargs -t %{__perl} -pi -e 's|HAVE_OCTAVE_29|HAVE_OCTAVE_30|g'
 %patch0 -p0
 %patch1 -p0
 %patch2 -p0
