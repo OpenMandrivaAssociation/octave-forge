@@ -18,12 +18,10 @@ Requires:       ImageMagick
 Requires:       octave3
 Requires:       octave(api) = %{octave_api}
 BuildRequires:  cvs2cl
-BuildRequires:  fftw3-devel
 BuildRequires:  gcc-gfortran
 BuildRequires:  ginac-devel
 BuildRequires:  gsl-devel
 BuildRequires:  ImageMagick-devel
-BuildRequires:  lapack-devel
 BuildRequires:  latex2html
 BuildRequires:  jpeg-devel
 BuildRequires:  nc-dap-devel
@@ -33,7 +31,6 @@ BuildRequires:  png-devel
 BuildRequires:  octave(api) = %{octave_api}
 BuildRequires:  pcre-devel
 BuildRequires:  qhull-devel
-BuildRequires:  readline-devel
 BuildRequires:  tetex
 BuildRequires:  tetex-latex
 BuildRequires:  tetex-dvipdfm
