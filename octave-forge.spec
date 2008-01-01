@@ -27,7 +27,7 @@ BuildRequires:  jpeg-devel
 BuildRequires:  nc-dap-devel
 BuildRequires:  ncurses-devel
 BuildRequires:  png-devel
-#BuildRequires:  octave-devel
+BuildRequires:  octave-devel
 BuildRequires:  octave(api) = %{octave_api}
 BuildRequires:  pcre-devel
 BuildRequires:  qhull-devel
