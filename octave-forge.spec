@@ -33,6 +33,7 @@ BuildRequires:  png-devel
 BuildRequires:  octave(api) = %{octave_api}
 BuildRequires:  pcre-devel
 BuildRequires:  qhull-devel
+BuildRequires:  readline-devel
 BuildRequires:  tetex
 BuildRequires:  tetex-latex
 BuildRequires:  tetex-dvipdfm
