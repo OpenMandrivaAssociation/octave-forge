@@ -2,7 +2,7 @@
 
 Name:           octave-forge
 Version:        2006.07.09
-Release:        %mkrel 6
+Release:        %mkrel 7
 Epoch:          0
 Summary:        Contributed functions for octave
 Group:          Sciences/Mathematics
@@ -21,7 +21,7 @@ BuildRequires:  cvs2cl
 BuildRequires:  gcc-gfortran
 BuildRequires:  ginac-devel
 BuildRequires:  gsl-devel
-BuildRequires:  ImageMagick-devel
+BuildRequires:  imagemagick-devel
 BuildRequires:  latex2html
 BuildRequires:  jpeg-devel
 BuildRequires:  nc-dap-devel
