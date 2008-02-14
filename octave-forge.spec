@@ -2,7 +2,7 @@
 
 Name:           octave-forge
 Version:        20071212
-Release:        %mkrel 2
+Release:        %mkrel 3
 Summary:        Contributed functions for octave
 
 Group:          Sciences/Mathematics
