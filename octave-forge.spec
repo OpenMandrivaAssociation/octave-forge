@@ -2,7 +2,7 @@
 
 Name:           octave-forge
 Version:        20071212
-Release:        %mkrel 4
+Release:        %mkrel 5
 Summary:        Contributed functions for octave
 
 Group:          Sciences/Mathematics
@@ -17,6 +17,7 @@ URL:            http://octave.sourceforge.net
 ## tar czf octave-forge-bundle-%{version}.patched.tar.gz octave-forge-bundle-%{version}
 ## rm -Rf octave-forge-bundle-%{version}
 Source0:        %{name}-bundle-%{version}.patched.tar.gz
+Patch0:		octave-forge-magick.diff
 BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}-root
 Requires:       octave(api) = %{octave_api} imagemagick
 Requires(post): octave(api) = %{octave_api}
@@ -120,6 +121,10 @@ do
    cd ..
 done
 
+pushd main/image-*
+%patch0 -p0
+popd
+
 # edit.m is now in octave
 rm main/miscellaneous-1.0.4/inst/edit.m
 
@@ -139,6 +144,7 @@ find -name \*.m | xargs %{__perl} -pi -e 's/\r$//g'
 #Prevents escape sequence from being inserted into octave version string
 export TERM=""
 export JAVA_HOME=%{java_home}
+export CPPFLAGS=`MagickCore-config --cppflags`
 for pkg in main extra language
 do
    cd $pkg
