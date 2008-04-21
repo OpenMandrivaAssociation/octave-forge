@@ -18,6 +18,8 @@ URL:            http://octave.sourceforge.net
 ## rm -Rf octave-forge-bundle-%{version}
 Source0:        %{name}-bundle-%{version}.patched.tar.gz
 Patch0:		octave-forge-magick.diff
+Patch1:         octave-forge-20080216-octgpr-1.1.1.patch
+Patch2:         octave-forge-20080216-fixed-0.7.5.patch
 BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}-root
 Requires:       octave(api) = %{octave_api} imagemagick
 Requires(post): octave(api) = %{octave_api}
@@ -110,9 +112,6 @@ rm extra/jhandles-*.tar.gz
 #Not Windows
 rm extra/windows-*.tar.gz
 
-# FIXME: doesn't build
-rm main/fixed-*.tar.gz
-
 #Unpack everything
 for pkg in main extra language
 do
@@ -129,6 +128,14 @@ done
 
 pushd main/image-*
 %patch0 -p0
+popd
+
+pushd main/octgpr-*
+%patch1 -p1
+popd
+
+pushd main/fixed-*
+%patch2 -p1
 popd
 
 #Install with -nodeps
