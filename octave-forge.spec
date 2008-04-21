@@ -1,8 +1,8 @@
 %define octave_api api-v32
 
 Name:           octave-forge
-Version:        20071212
-Release:        %mkrel 5
+Version:        20080216
+Release:        %mkrel 1
 Summary:        Contributed functions for octave
 
 Group:          Sciences/Mathematics
@@ -27,63 +27,68 @@ BuildRequires:  tetex gcc-gfortran ginac-devel qhull-devel
 BuildRequires:  imagemagick-devel nc-dap-devel pcre-devel gsl-devel
 BuildRequires:  libjpeg-devel libpng-devel ncurses-devel
 BuildRequires:  openssl-devel java-rpmbuild
-Provides: octave-audio = 1.0.2
-Provides: octave-combinatorics = 1.0.3
-Provides: octave-communications = 1.0.3
-Provides: octave-control = 1.0.2
-Provides: octave-econometrics = 1.0.3
-Provides: octave-fixed = 0.7.3
-Provides: octave-general = 1.0.3
-Provides: octave-gsl = 1.0.2
-Provides: octave-ident = 1.0.2
-Provides: octave-image = 1.0.3
-Provides: octave-informationtheory = 0.1.2
-Provides: octave-io = 1.0.3
-Provides: octave-irsa = 1.0.2
-Provides: octave-linear-algebra = 1.0.2
-Provides: octave-miscellaneous = 1.0.3
-Provides: octave-nnet = 0.1.4
-Provides: octave-octcdf = 1.0.6
-Provides: octave-odebvp = 1.0.1
-Provides: octave-odepkg = 0.3.3
-Provides: octave-optim = 1.0.0
-Provides: octave-optiminterp = 0.2.4
-Provides: octave-outliers = 0.13.4
+Provides: octave-audio = 1.1.0
+Provides: octave-combinatorics = 1.0.5
+Provides: octave-communications = 1.0.5
+Provides: octave-control = 1.0.5
+Provides: octave-econometrics = 1.0.5
+Provides: octave-financial = 0.0.1
+Provides: octave-fixed = 0.7.5
+Provides: octave-general = 1.0.5
+Provides: octave-gsl = 1.0.4
+Provides: octave-ident = 1.0.4
+Provides: octave-image = 1.0.5
+Provides: octave-informationtheory = 0.1.4
+Provides: octave-io = 1.0.5
+Provides: octave-irsa = 1.0.4
+Provides: octave-linear-algebra = 1.0.4
+Provides: octave-miscellaneous = 1.0.5
+Provides: octave-nnet = 0.1.6
+Provides: octave-octcdf = 1.0.8
+Provides: octave-octgpr = 1.1.1
+Provides: octave-odebvp = 1.0.3
+Provides: octave-odepkg = 0.4.1
+Provides: octave-optim = 1.0.2
+Provides: octave-optiminterp = 0.2.6
+Provides: octave-outliers = 0.13.6
 %ifnarch x86_64 ppc64
-Provides: octave-parallel = 1.0.3
+Provides: octave-parallel = 1.0.5
 %endif
-Provides: octave-physicalconstants = 0.1.2
-Provides: octave-plot = 1.0.2
-Provides: octave-signal = 1.0.4
-Provides: octave-sockets = 1.0.2
-Provides: octave-specfun = 1.0.3
-Provides: octave-special-matrix = 1.0.2
-Provides: octave-splines = 1.0.2
-Provides: octave-statistics = 1.0.3
-Provides: octave-strings = 1.0.2
-Provides: octave-struct = 1.0.2
-Provides: octave-symbolic = 1.0.3
-Provides: octave-time = 1.0.2
-Provides: octave-vrml = 1.0.3
-Provides: octave-zenity = 0.5.2
-Provides: octave-bim = 0.0.2
-Provides: octave-civil-engineering = 1.0.2
-Provides: octave-fpl = 0.0.2
-Provides: octave-graceplot = 1.0.2
-Provides: octave-integration = 1.0.2
-Provides: octave-java = 1.2.1
-Provides: octave-mapping = 1.0.2
-Provides: octave-msh = 0.0.2
-Provides: octave-nan = 1.0.2
-Provides: octave-pdb = 1.0.2
-Provides: octave-secs1d = 0.0.3
-Provides: octave-secs2d = 0.0.3
-Provides: octave-symband = 1.0.3
-Provides: octave-tcl-octave = 0.1.3
-Provides: octave-triangular = 1.0.1
-Provides: octave-tsa = 3.10.3
-Provides: octave-xraylib = 1.0.3
-Provides: octave-language-pt_br = 1.0.3
+Provides: octave-physicalconstants = 0.1.4
+Provides: octave-plot = 1.0.4
+Provides: octave-signal = 1.0.6
+Provides: octave-sockets = 1.0.3
+Provides: octave-specfun = 1.0.5
+Provides: octave-special-matrix = 1.0.4
+Provides: octave-splines = 1.0.4
+Provides: octave-statistics = 1.0.5
+Provides: octave-strings = 1.0.4
+Provides: octave-struct = 1.0.4
+Provides: octave-symbolic = 1.0.5
+Provides: octave-time = 1.0.5
+Provides: octave-vrml = 1.0.5
+Provides: octave-zenity = 0.5.4
+Provides: octave-ad = 1.0.1
+Provides: octave-bim = 0.0.5
+Provides: octave-civil-engineering = 1.0.4
+Provides: octave-fpl = 0.1.1
+Provides: octave-graceplot = 1.0.4
+Provides: octave-integration = 1.0.4
+Provides: octave-java = 1.2.3
+#Provides: octave-jhandles = 0.3.2
+Provides: octave-mapping = 1.0.4
+Provides: octave-msh = 0.0.5
+Provides: octave-multicore = 0.2.1
+Provides: octave-nan = 1.0.4
+Provides: octave-pdb = 1.0.4
+Provides: octave-secs1d = 0.0.5
+Provides: octave-secs2d = 0.0.5
+Provides: octave-symband = 1.0.5
+Provides: octave-tcl-octave = 0.1.5
+Provides: octave-triangular = 1.0.3
+Provides: octave-tsa = 3.10.5
+Provides: octave-xraylib = 1.0.5
+Provides: octave-language-pt_br = 1.0.5
 
 %description
 Octave-forge is a community project for collaborative development of
@@ -102,10 +107,11 @@ rm main/parallel-*.tar.gz
 rm extra/engine-*.tar.gz
 #Can't handle jhandles yet
 rm extra/jhandles-*.tar.gz
-#Not MacOSX
-rm extra/macosx-*.tar.gz
 #Not Windows
 rm extra/windows-*.tar.gz
+
+# FIXME: doesn't build
+rm main/fixed-*.tar.gz
 
 #Unpack everything
 for pkg in main extra language
@@ -124,12 +130,6 @@ done
 pushd main/image-*
 %patch0 -p0
 popd
-
-# edit.m is now in octave
-rm main/miscellaneous-1.0.4/inst/edit.m
-
-#Cleanup some CVS directories
-find -name CVS | xargs rm -rf
 
 #Install with -nodeps
 sed -i -e "s/pkg('install',/pkg('install','-nodeps',/" */*/Makefile
@@ -191,11 +191,13 @@ do
 done
 
 #Move aurecord to arch-dependent dir
+if [ -d $RPM_BUILD_ROOT%{_datadir}/octave/packages/${audiover}/bin ]; then
 archdir=%{_libexecdir}/octave/packages/`octave-config -p CANONICAL_HOST_TYPE`-%{octave_api}
 audiover=`basename $RPM_BUILD_ROOT%{_datadir}/octave/packages/audio-*`
 mkdir -p $RPM_BUILD_ROOT${archdir}/${audiover}
 mv $RPM_BUILD_ROOT%{_datadir}/octave/packages/${audiover}/bin \
    $RPM_BUILD_ROOT${archdir}/${audiover}/
+fi
 
 %clean
 rm -rf $RPM_BUILD_ROOT
