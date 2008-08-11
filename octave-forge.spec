@@ -20,6 +20,7 @@ Source0:        %{name}-bundle-%{version}.patched.tar.gz
 Patch0:         %{name}-20080429-gcc43.patch
 Patch1:         %{name}-20080429-ImageMagick.patch
 Patch2:         %{name}-20080429-audio-1.1.1.patch
+Patch3:         %{name}-20080429-symbolic-1.0.6.patch
 BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}-root
 
 Requires(post): octave(api) = %{octave_api}
@@ -144,6 +145,7 @@ done
 %patch0 -p1
 %patch1 -p1
 %patch2 -p1
+%patch3 -p1
 
 #Install with -nodeps
 sed -i -e "s/pkg('install',/pkg('install','-nodeps',/" */*/Makefile
