@@ -152,8 +152,10 @@ sed -i -e "s/pkg('install',/pkg('install','-nodeps',/" */*/Makefile
 
 
 %build
-#Prevents escape sequence from being inserted into octave version string
+# Prevents escape sequence from being inserted into octave version string
 export TERM=""
+# For the java package
+export JAVA_HOME=%{java_home}
 for pkg in main extra language
 do
    cd $pkg
