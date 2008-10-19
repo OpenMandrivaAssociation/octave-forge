@@ -5,7 +5,7 @@ Version:        20080831
 Release:        %mkrel 1
 Summary:        Contributed functions for octave
 
-Group:          Applications/Engineering
+Group:          Sciences/Mathematics
 License:        GPLv2+ and Public Domain
 URL:            http://octave.sourceforge.net
 ## Source0:     http://downloads.sourceforge.net/sourceforge/octave/%{name}-bundle-%{version}.tar.gz
