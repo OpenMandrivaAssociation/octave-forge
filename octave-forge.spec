@@ -1,8 +1,8 @@
-%define octave_api api-v32
+%define octave_api %(octave-config -p API_VERSION || echo 0)
 
 Name:           octave-forge
 Version:        20090607
-Release:        %mkrel 2
+Release:        %mkrel 3
 Summary:        Contributed functions for octave
 
 Group:          Sciences/Mathematics
@@ -17,8 +17,11 @@ URL:            http://octave.sourceforge.net
 ## tar czf octave-forge-bundle-%{version}.patched.tar.gz octave-forge-bundle-%{version}
 ## rm -Rf octave-forge-bundle-%{version}
 Source0:        %{name}-bundle-%{version}.patched.tar.gz
-Patch0:		octave-forge-20090607-includes.patch
-Patch1:		octave-forge-20090607-ann-swig-build.patch
+Patch0:		octave-forge-20090607-ann-swig-build.patch
+Patch1:		octave-forge-20090607-parallel-build.patch
+Patch2:		octave-forge-20090607-java-build.patch
+Patch3:		octave-forge-20090607-fixed-build.patch
+Patch4:		octave-forge-20090607-vrml-build.patch
 BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}-root
 
 Requires(post): octave(api) = %{octave_api}
@@ -29,18 +32,23 @@ BuildRequires:  tetex gcc-gfortran ginac-devel qhull-devel
 BuildRequires:  imagemagick-devel nc-dap-devel pcre-devel gsl-devel
 BuildRequires:  libjpeg-devel libpng-devel ncurses-devel ftp-devel
 BuildRequires:  openssl-devel java-rpmbuild
+
+# Main
 Provides: octave-ann = 1.0.2
-Provides: octave-audio = 1.1.4
+# audio doesn't compile on Mandriva for some reason
+#Provides: octave-audio = 1.1.4
 Provides: octave-benchmark = 1.1.1
 Provides: octave-bioinfo = 0.1.2
 Provides: octave-combinatorics = 1.0.9
 Provides: octave-communications = 1.0.10
 Provides: octave-control = 1.0.11
+# octave-database is removed
 Provides: octave-data-smoothing = 1.2.0
 Provides: octave-econometrics = 1.0.8
 Provides: octave-financial = 0.3.2
 Provides: octave-fixed = 0.7.10
-Provides: octave-ftp = 1.0.2
+# temporarily disable: SWIG wrappers are broken: known upstream
+# Provides: octave-ftp = 1.0.2
 Provides: octave-ga = 0.9.7
 Provides: octave-general = 1.1.3
 Provides: octave-gsl = 1.0.8
@@ -75,17 +83,22 @@ Provides: octave-strings = 1.0.7
 Provides: octave-struct = 1.0.7
 Provides: octave-symbolic = 1.0.9
 Provides: octave-time = 1.0.9
+# octave-video is removed
 Provides: octave-vrml = 1.0.10
 Provides: octave-zenity = 0.5.7
+
+# Extra
 Provides: octave-ad = 1.0.6
 Provides: octave-bim = 0.1.1
 Provides: octave-bugfix = 3.0.6
 Provides: octave-civil-engineering = 1.0.7
 Provides: octave-fpl = 0.1.6
 Provides: octave-generate_html = 0.0.9
-Provides: octave-graceplot = 1.0.8
+# temporarily disable: doesn't yet build
+# Provides: octave-graceplot = 1.0.8
 Provides: octave-integration = 1.0.7
 Provides: octave-java = 1.2.6
+# octave-jhandles is removed
 Provides: octave-mapping = 1.0.7
 Provides: octave-msh = 0.1.1
 Provides: octave-multicore = 0.2.15
@@ -100,9 +113,13 @@ Provides: octave-secs2d = 0.0.8
 Provides: octave-symband = 1.0.10
 Provides: octave-tcl-octave = 0.1.8
 Provides: octave-tsa = 4.0.1
+# octave-windows is removed
 Provides: octave-xraylib = 1.0.8
+
+# Language
+# temporarily disable, doesn't build
+# Provides: octave-spanish = 1.0.1
 Provides: octave-pt_br = 1.0.8
-Provides: octave-spanish = 1.0.1
 
 
 %description
@@ -127,6 +144,15 @@ rm extra/jhandles-*.tar.gz
 rm extra/windows-*.tar.gz
 # 5. exclude database stuff--it should be in its own package
 rm main/database-*.tar.gz
+# 6. exclude ftp -- SWIG wrappers are broken 
+rm main/ftp-*.tar.gz 
+# 7. exclude graceplot -- doesn't build against Octave 3.2 
+rm extra/graceplot-*.tar.gz 
+# 8. exclude spanish -- doesn't build against OCtave 3.2
+rm language/spanish-*.tar.gz
+
+# audio doesn't build on Mandriva 2010.0
+rm main/audio-*.tar.gz
 
 #Unpack everything
 for pkg in main extra language
@@ -145,10 +171,12 @@ done
 #apply patches
 %patch0 -p0
 %patch1 -p0
+%patch2 -p0
+%patch3 -p0
+%patch4 -p0
 
 #Install with -nodeps
 sed -i -e "s/pkg('install',/pkg('install','-nodeps',/" */*/Makefile
-
 
 %build
 # Prevents escape sequence from being inserted into octave version string
