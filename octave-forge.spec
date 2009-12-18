@@ -1,4 +1,4 @@
-%define octave_api %(octave-config -p API_VERSION || echo 0)
+%define octave_api %(%{_bindir}/octave-config -p API_VERSION || echo 0)
 
 Name:           octave-forge
 Version:        20090607
@@ -27,6 +27,7 @@ BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}-root
 Requires(post): octave(api) = %{octave_api}
 Requires(postun): octave(api) = %{octave_api}
 Requires:      octave(api) = %{octave_api} imagemagick
+Requires:      octave >= 3.0.0-1
 BuildRequires:  octave-devel >= 3.0.0-1
 BuildRequires:  tetex gcc-gfortran ginac-devel qhull-devel
 BuildRequires:  imagemagick-devel nc-dap-devel pcre-devel gsl-devel
