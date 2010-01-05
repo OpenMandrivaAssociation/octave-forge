@@ -2,7 +2,7 @@
 
 Name:           octave-forge
 Version:        20090607
-Release:        %mkrel 3
+Release:        %mkrel 4
 Summary:        Contributed functions for octave
 
 Group:          Sciences/Mathematics
@@ -61,7 +61,8 @@ Provides: octave-linear-algebra = 1.0.8
 Provides: octave-miscellaneous = 1.0.9
 Provides: octave-missing-functions = 1.0.2
 Provides: octave-nnet = 0.1.10
-Provides: octave-octcdf = 1.0.13
+# temporarily disable: doesn't build because of gcc flag issue
+# Provides: octave-octcdf = 1.0.13
 Provides: octave-octgpr = 1.1.5
 Provides: octave-odebvp = 1.0.6
 Provides: octave-odepkg = 0.6.7
@@ -154,6 +155,9 @@ rm language/spanish-*.tar.gz
 # audio doesn't build on Mandriva 2010.0
 rm main/audio-*.tar.gz
 
+# octcdf doesn't build on Mandriva 2010.0
+rm main/octcdf-*.tar.gz
+
 #Unpack everything
 for pkg in main extra language
 do
@@ -186,7 +190,7 @@ export JAVA_HOME=%{java_home}
 for pkg in main extra language
 do
    cd $pkg
-   for dir in *.[0-9]
+   for dir in `find ./* -type d -prune`
    do
       cd $dir
       if [ -f configure ]
@@ -220,7 +224,7 @@ export TERM=""
 for pkg in main extra language
 do
    cd $pkg
-   for dir in *.[0-9]
+   for dir in `find ./* -type d -prune`
    do
        cd $dir
        %{makeinstall_std} TMPDIR=%{_tmppath} DISTPKG=mandriva
