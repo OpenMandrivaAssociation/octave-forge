@@ -29,6 +29,7 @@ Requires(postun): octave(api) = %{octave_api}
 Requires:      octave(api) = %{octave_api} imagemagick
 BuildRequires:  octave-devel >= 3.0.0-1
 BuildRequires:  tetex gcc-gfortran ginac-devel qhull-devel
+BuildRequires:	mesaglu-devel
 BuildRequires:  imagemagick-devel nc-dap-devel pcre-devel gsl-devel
 BuildRequires:  libjpeg-devel libpng-devel ncurses-devel ftp-devel
 BuildRequires:  openssl-devel java-rpmbuild
