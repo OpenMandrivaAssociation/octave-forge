@@ -1,0 +1,35 @@
+--- main/vrml-1.0.10/inst/vrml_text.m	2009/08/02 21:17:03	6072
++++ main/vrml-1.0.10/inst/vrml_text.m	2009/08/04 05:01:52	6073
+@@ -46,7 +46,7 @@
+ 
+   df = tars (col, size, family, justify, style, verbose);
+ 
+-  s = read_options (varargin{:}, "op1",op1,"op0",op0, "default",df);
++  s = read_options (varargin, "op1",op1,"op0",op0, "default",df);
+   col=       s.col;
+   size=      s.size;
+   family=    s.family;
+--- main/vrml-1.0.10/inst/vrml_transfo.m	2009/08/02 21:17:03	6072
++++ main/vrml-1.0.10/inst/vrml_transfo.m	2009/08/04 05:01:52	6073
+@@ -57,7 +57,7 @@
+ if prod(size(c))==1, c = [c;c;c]; end
+ 
+ if all(size(r) == 3)
+-  if abs (det (r) - 1) > sqrt (eps), r2 = orthogonalize (r);
++  if abs (det (r) - 1) > sqrt (eps), r2 = orth (r);
+   else                               r2 = r;
+   end
+   [axis,ang] = rotparams (r2);
+--- main/vrml-1.0.10/inst/vrml_DirectionalLight.m	2009/07/19 06:38:10	6029
++++ main/vrml-1.0.10/inst/vrml_DirectionalLight.m	2009/07/19 17:03:21	6030
+@@ -42,8 +42,8 @@
+     end
+ 
+     body = [body,\
+-	    sprintf ("   %-20s   %s\n",key, 
+-		     sprintf (getfield (tpl,key), val))];
++	    sprintf("   %-20s   %s\n",key,
++		     sprintf(getfield (tpl,key), val))];
+   end
+ end
+ s = sprintf ("DirectionalLight { \n%s}\n", body);

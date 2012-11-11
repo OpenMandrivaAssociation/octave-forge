@@ -1,0 +1,31 @@
+--- extra/java-1.2.6/src/__java__.cc	2009/08/15 18:44:39	6097
++++ extra/java-1.2.6/src/__java__.cc	2009/08/16 14:24:11	6098
+@@ -31,6 +31,7 @@
+ 
+ #include <algorithm>
+ #include <map>
++#include <iostream>
+ #include <fstream>
+ 
+ typedef jint (JNICALL *JNI_CreateJavaVM_t) (JavaVM **pvm, JNIEnv **penv, void *args);
+@@ -584,9 +585,9 @@
+       idx_vector v = idx(i).index_vector ();
+       if (! error_state)
+         {
+-          jintArray_ref i_array (jni_env, jni_env->NewIntArray (v.capacity ()));
++          jintArray_ref i_array (jni_env, jni_env->NewIntArray (v.length ()));
+           jint *buf = jni_env->GetIntArrayElements (i_array, 0);
+-          for (int k=0; k<v.capacity (); k++)
++          for (int k=0; k<v.length (); k++)
+             buf[k] = v(k);
+           jni_env->ReleaseIntArrayElements (i_array, buf, 0);
+           jni_env->SetObjectArrayElement (retval, i, i_array);
+@@ -676,7 +677,7 @@
+   }
+ 
+   string_vector v (name_list);
+-  return v.qsort (true);
++  return v.sort (true);
+ }
+ 
+ static octave_value convert_to_string (JNIEnv *jni_env, jobject java_object, bool force, char type)
