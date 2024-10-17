@@ -7,7 +7,7 @@ Summary:        Contributed functions for octave
 
 Group:          Sciences/Mathematics
 License:        GPLv2+ and Public Domain
-URL:            http://octave.sourceforge.net
+URL:            https://octave.sourceforge.net
 ## Source0:     http://downloads.sourceforge.net/sourceforge/octave/%{name}-bundle-%{version}.tar.gz
 ## The original sources contain a non-free tree of functions that are
 ## GPL incompatible. A patched version with the non-free sources removed
